@@ -40,33 +40,30 @@ envelope.addEventListener("click", () => {
 
 let yesScale = 1;
 
-yesBtn.style.position = "relative"
-yesBtn.style.transformOrigin = "center center";
 yesBtn.style.transition = "transform 0.3s ease";
 
 noBtn.addEventListener("click", () => {
-    yesScale += 2;
+    yesScale += 1.5; // Grow slightly slower on mobile to not fill screen instantly
 
-    if (yesBtn.style.position !== "fixed") {
-        yesBtn.style.position = "fixed";
-        yesBtn.style.top = "50%";
-        yesBtn.style.left = "50%";
-        yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
-    }else{
-        yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
-    }
+    yesBtn.style.transform = `scale(${yesScale})`;
+    
+    // Optional: Move NO button away purely visually so it doesn't overlap
+    // noBtn.style.transform = "translateX(100px)"; 
 });
 
 // YES is clicked
 
+// YES is clicked
 yesBtn.addEventListener("click", () => {
-    title.textContent = "Урааааа!";
-
+    title.textContent = " ";
     catImg.src = "cat_dance.gif";
-
     document.querySelector(".letter-window").classList.add("final");
 
+    // Hide buttons properly
     buttons.style.display = "none";
+    
+    // Reset any transform on the Yes button so it doesn't interfere with layout
+    yesBtn.style.transform = "scale(1)";
 
     finalText.style.display = "block";
 });
